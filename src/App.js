@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+import axios from "axios";
+import firebase from "./firebase";
+import { Switch, Route, Link } from "react-router-dom";
+import MoviesComp from "./components/movies/Movies";
+import AppMenuComp from "./components/AppMenu";
+import MainPageComp from "./components/MainPage";
+import SubscripsionsComp from "./components/Subscripsions";
+import UsersManagementComp from "./components/UsersManagement";
+import MoviesMenuComp from "./components/movies/MoviesMenu";
 
 function App() {
+  useEffect(() => {
+    // getAllMembers();
+  }, []);
+
+  // const getAllMembers = async () => {
+  //   firebase
+  //     .firestore()
+  //     .collection("Users")
+  //     .get()
+  //     .then(async (data) => {
+  //       if (data.docs.length === 0) {
+  //       }
+  //     });
+  //   };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <AppMenuComp />
+      <Switch>
+        <Route path='/movies' component={MoviesMenuComp} />
+        <Route path='/subscriptions' component={SubscripsionsComp} />
+        <Route path='/users_management' component={UsersManagementComp} />
+        {/* <Route path='/logout' component={} /> */}
+      </Switch>
     </div>
   );
 }
