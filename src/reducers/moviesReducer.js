@@ -1,12 +1,8 @@
 import firebase from "firebase";
-import axios from "axios";
-import utils from "./utils";
 
-const initialState = {
-  movies: [],
-};
 
-const moviesReducer = (state = initialState, action) => {
+
+const movies = (state = [], action) => {
   switch (action.type) {
     case "INITILIZE_MOVIES_INTO_FIREBASE":
       action.payload.forEach((movie) => {
@@ -28,32 +24,32 @@ const moviesReducer = (state = initialState, action) => {
       return state
 
     case "ADD_ALL_MOVIES":
-      return { ...state, movies: action.payload };
+      return action.payload;
 
     case "DELETE_MOVIE":
-      let updatedMovies = state.movies.filter(
+      let updatedMovies = state.filter(
         (movie) => movie.id !== action.payload
       );
-      return { ...state, movies: updatedMovies };
+      return updatedMovies;
 
     case "UPDATE_MOVIE":
-        let movies2 = state.movies.map(movie => {
+        let movies2 = state.map(movie => {
             if (movie.id === action.payload.id) {
                 return action.payload.movie
             }
             return movie
         })
-        return {...state, movies: movies2}
+        return movies2
 
 
     case "ADD_MOVIE":
-      let movies = state.movies
-      movies.push(action.payload)
-      return {...state, movies: movies}
-    
+      let movies3 = state
+      movies3.push(action.payload)
+      return movies3
+  
     default:
       return state;
   }
 };
 
-export default moviesReducer;
+export default movies;

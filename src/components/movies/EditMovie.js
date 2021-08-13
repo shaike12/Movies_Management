@@ -11,7 +11,8 @@ const EditMovieComp = () => {
   const history = useHistory()
 
   useEffect(() => {
-    firebase
+    async function fetchData(){
+    await firebase
       .firestore()
       .collection("Movies")
       .doc(id)
@@ -20,10 +21,13 @@ const EditMovieComp = () => {
           setMovie(doc.data());
         
       });
+    }
+    fetchData()
+
   }, []);
 
-  const update = () => {
-      let docRef = firebase.firestore().collection("Movies").doc(id);
+  const update = async () => {
+      let docRef = await firebase.firestore().collection("Movies").doc(id);
       docRef
       .set(movie)
       .then(() => {

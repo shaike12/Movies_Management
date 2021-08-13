@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link, Switch, Route } from "react-router-dom";
-import MoviesComp from './movies/Movies';
+import { Link} from "react-router-dom";
 const AppMenuComp = () => {
     return (
         <div>
@@ -10,9 +9,7 @@ const AppMenuComp = () => {
                 <button><Link to='/users_management'>Users Management</Link></button>
                 <button><Link to='/logout'>Logout</Link></button>
             </menu>
-            <Switch>
-                <Route path="/all_movies" component={MoviesComp} />
-            </Switch>
+            
         </div>
     )
 }

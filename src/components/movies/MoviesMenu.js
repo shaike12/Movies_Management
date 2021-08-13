@@ -17,9 +17,9 @@ const MoviesMenuComp = (props) => {
         </div>
         <div>
       <Switch>
-          <Route path="/movies/all_movies" component={MoviesComp} />
-          <Route path="/movies/add_movie" component={AddMovieComp} />
-          <Route path={url + "/movie/edit_movie/:id"} component={EditMovieComp} />
+          <Route path={url + "/all_movies"} component={MoviesComp} />
+          <Route path={url + "/add_movie"} component={AddMovieComp} />
+          <Route path={url + "/movie/edit/:id"} component={EditMovieComp} />
       </Switch>
       </div>
       </div>
