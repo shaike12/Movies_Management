@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MovieComp = ({ movie, update }) => {
+const MovieComp = ({ movie }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +81,7 @@ const MovieComp = ({ movie, update }) => {
               variant='contained'
               color='primary'
               size='small'
-              onClick={() => update(movie.id)}
+              
             >
               Edit
             </Button>

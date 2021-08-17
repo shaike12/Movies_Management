@@ -11,10 +11,10 @@ const MembersMenuComp = () => {
     <div>
       <div>
         <button>
-          <Link to='/subscriptions/all_members'>All Members</Link>
+          <Link to={ url + '/all_members'}>All Members</Link>
         </button>
         <button>
-          <Link to='/subscriptions/add_member'>Add Member</Link>
+          <Link to={ url + '/add_member'}>Add Member</Link>
         </button>
       </div>
       <div>

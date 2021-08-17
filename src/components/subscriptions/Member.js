@@ -1,14 +1,38 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
 import firebase from "firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingBarComp from "../LoadingBar";
+import MoviesWatchedComp from "./MoviesWatched";
 
 const MemberComp = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const { url } = useRouteMatch()
+  const moviesStore = useSelector((state) => state.movies);
+  const { url } = useRouteMatch();
+  const [watchedMovies, setWatchedMovies] = useState([]);
+
+
+    useEffect(() => {
+        // getAllSubscriptions()
+        
+    }, [])
+
+//    const getAllSubscriptions = async () => {
+//       await firebase
+//               .firestore()
+//               .collection("Subscriptions")
+//               .get()
+//               .then((subscriptions) => {
+//                 subscriptions.forEach((subscription) => {
+//                   if (subscription.data().MemberId === props.member.id) {
+//                     setWatchedMovies(subscription.data().Movies);
+//                   }
+//                 });
+//               });
+//   }
+
 
   // Delete Member From Firebase
   const deleteMember = async (id) => {
@@ -27,7 +51,7 @@ const MemberComp = (props) => {
   };
 
   return (
-    <div>
+    <div style={{border: "1px Solid black", maxWidth: '400px', marginBottom: "20px"}}>
       {isLoading ? (
         <LoadingBarComp />
       ) : (
@@ -41,6 +65,7 @@ const MemberComp = (props) => {
             <Link to={url + `/member/edit/${props.member.id}`}>Edit</Link>
           </Button>
           <Button onClick={() => deleteMember(props.member.id)}>Delete</Button>
+          <MoviesWatchedComp watchedMovies={watchedMovies} />
         </>
       )}
     </div>

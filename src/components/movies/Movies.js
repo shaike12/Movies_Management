@@ -54,7 +54,7 @@ const MoviesComp = (props) => {
   const handleEditMovie = () => {};
 
   // Filtered Movies With Search User Input
-    let filterdMovies= moviesStore.filter((movie) =>
+    let filterdMovies = moviesStore.filter((movie) =>
      movie.Name.toLowerCase().includes(search)
     )  
 
@@ -71,7 +71,7 @@ const MoviesComp = (props) => {
           ) : (
             filterdMovies.map((movie, index) => {
               return (
-                <MovieComp key={index} movie={movie} update={handleEditMovie} />
+                <MovieComp key={index} movie={movie} />
               );
             })
           )}

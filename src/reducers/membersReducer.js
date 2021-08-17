@@ -1,7 +1,5 @@
 import firebase from "firebase";
 
-
-
 const members = (state = [], action) => {
   switch (action.type) {
     case "INITILIZE_MEMBERS_INTO_FIREBASE":
@@ -15,15 +13,13 @@ const members = (state = [], action) => {
             City: member.address.city,
           })
           .then((status) => {
-            
             console.log("Initialize Members Into FireBase");
           });
-
       });
-      return state
+      return state;
 
     case "ADD_ALL_MEMBERS":
-      return action.payload ;
+      return action.payload;
 
     case "DELETE_MEMBER":
       let updatedMembers = state.filter(
@@ -32,20 +28,22 @@ const members = (state = [], action) => {
       return updatedMembers;
 
     case "UPDATE_MEMBER":
-        let members = state.map(member => {
-            if (member.id === action.payload.id) {
-                return action.payload.member
-            }
-            return member
-        })
-        return members
-
+      let members = state.map((member) => {
+        if (member.id === action.payload.id) {
+          return action.payload.member;
+        }
+        return member;
+      });
+      return members;
 
     case "ADD_MEMBER":
-      let movies = state
-      movies.push(action.payload)
-      return movies
-    
+      let members2 = state;
+      members2.push(action.payload);
+      return members2;
+
+    // case "GET_MEMBER_WATCHED_MOVIES":
+
+
     default:
       return state;
   }

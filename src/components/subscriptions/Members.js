@@ -3,26 +3,25 @@ import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import MemberComp from "./Member";
 import LoadingBarComp from "../LoadingBar";
-import axios from 'axios'
+import axios from "axios";
 
-
-
-const MembersComp = () => {
+const MembersComp = (props) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
   const membersStore = useSelector((state) => state.members);
 
   useEffect(() => {
-    async function fetchData() {
-      await firebase
+    function fetchData() {
+      firebase
         .firestore()
         .collection("Members")
         .get()
         .then((data) => {
           let allMembers = [];
-
-          data.forEach((doc) => {
+            
+          data.forEach(async (doc) => {
+            
             allMembers.push({ ...doc.data(), id: doc.id });
           });
           dispatch({ type: "ADD_ALL_MEMBERS", payload: allMembers });
@@ -30,23 +29,25 @@ const MembersComp = () => {
     }
     fetchData();
     setLoading(false);
-    // initilizeMembers() 
+    // initilizeMembers()
   }, []);
 
 
-//   const initilizeMembers = async () => {
-//     setLoading(true);
-//     let resp = await axios.get("https://jsonplaceholder.typicode.com/users")
-//     let members = resp.data.splice(0, 10);
-//     dispatch({type: "INITILIZE_MEMBERS_INTO_FIREBASE", payload: members})
-//     setLoading(false);
-   
-//   };
+  
+
+  //   const initilizeMembers = async () => {
+  //     setLoading(true);
+  //     let resp = await axios.get("https://jsonplaceholder.typicode.com/users")
+  //     let members = resp.data.splice(0, 10);
+  //     dispatch({type: "INITILIZE_MEMBERS_INTO_FIREBASE", payload: members})
+  //     setLoading(false);
+
+  //   };
 
   return (
     <div>
       {loading ? (
-          <LoadingBarComp/>
+        <LoadingBarComp />
       ) : (
         <div>
           <h2>Subscriptions</h2>

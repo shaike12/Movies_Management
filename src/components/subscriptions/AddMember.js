@@ -20,7 +20,7 @@ const AddMemberComp = () => {
       .then(() => {
         dispatch({ type: "ADD_MEMBER", payload: member });
         console.log("MEMBER Seccessfully Added!");
-        history.push("/members/all_members");
+        history.push("/subscriptions/all_members");
       })
       .catch((err) => {
         console.log("Error Adding Member: ", err);
@@ -55,7 +55,8 @@ const AddMemberComp = () => {
         <Button onClick={addMember}>Save</Button>
         <Button onClick={() => history.push("/subscriptions/all_members")}>
           Cancel
-        </Button>
+        </Button><br/>
+        
       </form>
     </div>
   );

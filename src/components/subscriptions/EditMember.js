@@ -26,6 +26,8 @@ const EditMemberComp = () => {
 
   }, []);
 
+ 
+
   const update = async () => {
       let docRef = await firebase.firestore().collection("Members").doc(id);
       docRef
