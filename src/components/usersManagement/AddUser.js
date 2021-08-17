@@ -28,9 +28,9 @@ const AddUserComp = () => {
   const addUser = async () => {
     let docRef = await firebase.firestore().collection("Users");
     docRef
-      .add(user)
+      .add({...user, CreatedDate: getDate()} )
       .then(() => {
-        dispatch({ type: "ADD_USER", payload: user });
+        dispatch({ type: "ADD_USER", payload: {...user, CreatedDate: getDate()} });
         console.log("User Seccessfully Added!");
         history.push("/users_management/all_users");
       })
@@ -39,12 +39,21 @@ const AddUserComp = () => {
       });
   };
 
+  const getDate = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + "/" + dd + "/" + yyyy;
+    return today
+  };
   const handleCheckChieldElement = (checkBoxId) => {
     let newPermissions = permissions;
     let currentCheckBox = newPermissions[checkBoxId];
 
     currentCheckBox.isChecked = !currentCheckBox.isChecked;
-    
+
     if (
       currentCheckBox.value === "Create Subscriptions" ||
       currentCheckBox.value === "Update Subscriptions" ||
@@ -67,10 +76,12 @@ const AddUserComp = () => {
     let newUserPermissions = newPermissions.filter(
       (permission) => permission.isChecked
     );
-    let newUserPermissionsValues = newUserPermissions.map((permission) => permission.value);
-    
-    // Set The User's New Permissions 
-    setUser({ ...user, Permissions: newUserPermissionsValues});
+    let newUserPermissionsValues = newUserPermissions.map(
+      (permission) => permission.value
+    );
+
+    // Set The User's New Permissions
+    setUser({ ...user, Permissions: newUserPermissionsValues });
   };
 
   return (

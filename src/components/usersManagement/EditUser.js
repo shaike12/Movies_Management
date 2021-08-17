@@ -120,12 +120,15 @@ const EditUserComp = () => {
           onChange={(e) => setUser({ ...user, Username: e.target.value })}
         />
         <br />
-        Session Timeout:{" "}
+        Session Timeout (Minutes):{" "}
         <input
           type='text'
           value={user.SessionTimeout}
           onChange={(e) => setUser({ ...user, SessionTimeout: e.target.value })}
         />
+        <br />
+        Created Date:{" "}
+        {user.CreatedDate}
         <br />
         Permissions: <br />
         {permissions.map((permission, index) => {
